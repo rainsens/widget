@@ -76,7 +76,7 @@ abstract class BaseButton
 		return $attributes;
 	}
 	
-	abstract public function render();
+	abstract protected function render();
 	
 	public function __toString()
 	{

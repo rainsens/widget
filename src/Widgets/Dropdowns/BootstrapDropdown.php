@@ -1,9 +1,9 @@
 <?php
 namespace Rainsens\Widget\Widgets\Dropdowns;
 
-class BootstrapBaseDropdown extends BaseDropdown
+class BootstrapDropdown extends BaseDropdown
 {
-	public function render()
+	protected function render()
 	{
 		// TODO: Implement render() method.
 	}

@@ -23,7 +23,7 @@ class DropdownButton extends BaseButton
 		return $this;
 	}
 	
-	public function render()
+	protected function render()
 	{
 		$attributes = $this->getAttributes();
 		$attributes['split'] = $this->split;

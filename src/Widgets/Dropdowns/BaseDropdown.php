@@ -46,7 +46,7 @@ abstract class BaseDropdown
 		return $attributes;
 	}
 	
-	abstract public function render();
+	abstract protected function render();
 	
 	public function __toString()
 	{

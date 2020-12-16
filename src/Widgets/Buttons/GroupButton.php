@@ -13,7 +13,7 @@ class GroupButton extends BaseButton
 		return $this;
 	}
 	
-	public function render()
+	protected function render()
 	{
 		return $this->buttons;
 	}

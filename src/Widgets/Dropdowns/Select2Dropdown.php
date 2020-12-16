@@ -1,9 +1,9 @@
 <?php
 namespace Rainsens\Widget\Widgets\Dropdowns;
 
-class Select2BaseDropdown extends BaseDropdown
+class Select2Dropdown extends BaseDropdown
 {
-	public function render()
+	protected function render()
 	{
 		$attributes = $this->getAttributes();
 		return view('widget::dropdowns.dropdown', $attributes)->render();
