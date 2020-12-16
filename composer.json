@@ -1,0 +1,31 @@
+{
+    "name": "rainsens/widget",
+    "description": "A group of widget based on rainsens/asset",
+    "authors": [
+        {
+            "name": "Rainsen",
+            "email": "yusen@rainsen.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "laravel/framework": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rainsens\\Widget\\": "src"
+        },
+        "files": [
+            "bootstrap/helpers.php",
+            "bootstrap/button.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Rainsens\\Widget\\Providers\\WidgetServiceProvider"
+            ]
+        }
+    }
+}
