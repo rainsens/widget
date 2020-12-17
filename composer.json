@@ -10,7 +10,8 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
-        "laravel/framework": "^6.2"
+        "laravel/framework": "^6.2",
+        "rainsens/asset": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -20,7 +21,8 @@
             "bootstrap/helpers.php",
             "bootstrap/buttons.php",
             "bootstrap/dropdowns.php",
-            "bootstrap/nestables.php"
+            "bootstrap/nestables.php",
+            "bootstrap/forms.php"
         ]
     },
     "extra": {
