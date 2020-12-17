@@ -8,9 +8,9 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.2.5|^8.0",
         "ext-json": "*",
-        "laravel/framework": "^6.2",
+        "laravel/framework": "^6.20",
         "rainsens/asset": "dev-master"
     },
     "autoload": {
