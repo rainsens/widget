@@ -3,12 +3,13 @@
 use Rainsens\Widget\Widgets\Dropdowns\Select2Dropdown;
 use Rainsens\Widget\Widgets\Dropdowns\BootstrapDropdown;
 
-if (! function_exists('_dropdown')) {
-	function _dropdown(string $type = 'select2') {
-		if ($type === 'select2') {
-			return app(Select2Dropdown::class);
+if (! function_exists('_widget_dropdown')) {
+	function _widget_dropdown(array $dropdown = []) {
+		$type = empty($dropdown['type']) ? Select2Dropdown::DROPDOWN_SELECT2 : $dropdown['type'];
+		if ($type === Select2Dropdown::DROPDOWN_SELECT2) {
+			return app(Select2Dropdown::class, ['dropdown' => $dropdown]);
 		} else {
-			return app(BootstrapDropdown::class);
+			return app(BootstrapDropdown::class, ['dropdown' => $dropdown]);
 		}
 	}
 }

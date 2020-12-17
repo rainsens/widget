@@ -1,15 +1,15 @@
 <?php
 
-if (! function_exists('_recursive')) {
+if (! function_exists('_widget_recursive')) {
 	
-	function _recursive(array $data, $parentField, $parentId = 0, $level = 0) {
+	function _widget_recursive(array $data, $parentField, $parentId = 0, $level = 0) {
 		static $orderedData = [];
 		foreach ($data as $key => $value) {
 			if ($value[$parentField] === $parentId) {
 				$value['level'] = $level;
 				$orderedData[] = $value;
 				unset($data[$key]);
-				_recursive($data, $parentField, $value['id'], $level+1);
+				_widget_recursive($data, $parentField, $value['id'], $level+1);
 			}
 		}
 		return $orderedData;
@@ -31,6 +31,6 @@ if (! function_exists('widget_resource_path')) {
 
 if (! function_exists('widget_view_path')) {
 	function widget_view_path(string $path = '') {
-		return widget_resource_path('view') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+		return widget_resource_path('views') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
 	}
 }

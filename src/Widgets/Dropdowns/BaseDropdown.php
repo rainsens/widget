@@ -1,47 +1,58 @@
 <?php
 namespace Rainsens\Widget\Widgets\Dropdowns;
 
+use Illuminate\Support\Arr;
+
 abstract class BaseDropdown
 {
-	protected $label;
+	const DROPDOWN_SELECT2 = 'select2';
+	const DROPDOWN_BOOTSTRAP = 'bootstrap';
+	
+	public static $dropdowns = [
+		self::DROPDOWN_SELECT2,
+		self::DROPDOWN_BOOTSTRAP,
+	];
+	
 	/**
 	 * select2-primary select2-info select2-success select-warning
 	 */
 	protected $color = '';
-	protected $placeholder = '';
+	protected $placeholder = 'Please Select';
 	protected $isMultiple = false;
-	protected $items = [];
+	protected $items = [
+		['id' => 1, 'text' => 'Example Text 1', 'html' => 'Example Text 1', 'title' => ''],
+		['id' => 2, 'text' => 'Example Text 2', 'html' => 'Example Text 2', 'title' => ''],
+		['id' => 3, 'text' => 'Example Text 3', 'html' => 'Example Text 3', 'title' => ''],
+	];
 	
-	public function label(string $label = '')
+	public function __construct(array $dropdown = [])
 	{
-		$this->label = $label;
-		return $this;
+		$this->color = $dropdown['color'] ?? $this->color;
+		$this->placeholder = $dropdown['placeholder'] ?? $this->placeholder;
+		$this->isMultiple = $dropdown['isMultiple'] ?? $this->isMultiple;
+		$this->items = $dropdown['items'] ?? $this->items;
+		
+		$this->addPlaceholderForSingleSelect();
 	}
 	
-	public function color(string $color = '')
+	protected function addPlaceholderForSingleSelect()
 	{
-		$this->color = $color;
-		return $this;
-	}
-	
-	public function multiple(bool $isMultiple = true)
-	{
-		$this->isMultiple = $isMultiple;
-		return $this;
-	}
-	
-	public function items(array $items = [])
-	{
-		$this->items = $items;
-		return $this;
+		if (! $this->isMultiple) {
+			$this->items = Arr::prepend($this->items, [
+				'id'    => 0,
+				'text'  => $this->placeholder,
+				'html'  => $this->placeholder,
+				'title' => ''
+			]);
+		}
 	}
 	
 	public function getAttributes()
 	{
-		$attributes['label'] = $this->label;
 		$attributes['color'] = $this->color;
 		$attributes['placeholder'] = $this->placeholder;
-		$attributes['items'] = json_encode($this->items);
+		$attributes['isMultiple'] = $this->isMultiple;
+		$attributes['items'] = $this->items;
 		
 		return $attributes;
 	}

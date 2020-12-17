@@ -3,18 +3,17 @@ namespace Rainsens\Widget\Widgets\Buttons;
 
 class GroupButton extends BaseButton
 {
-	protected $buttons;
+	protected $buttons = [];
 	
-	public function push(...$buttons)
+	public function push(array $buttons)
 	{
-		foreach ($buttons as $button) {
-			$this->buttons .= $button;
-		}
+		$this->buttons = $buttons;
 		return $this;
 	}
 	
 	protected function render()
 	{
-		return $this->buttons;
+		$buttons = ['buttons' => $this->buttons];
+		return view('widget::buttons.group', $buttons)->render();
 	}
 }

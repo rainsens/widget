@@ -11,16 +11,10 @@ class DropdownButton extends BaseButton
 		["icon" => 'fa-coffee', "text" => 'Example text 3', 'url' => '', 'divide' => true],
 	];
 	
-	public function split(bool $split = false)
+	public function dropdown(...$dropdown)
 	{
-		$this->split = $split;
-		return $this;
-	}
-	
-	public function items(array $items = [])
-	{
-		$this->items = $items;
-		return $this;
+		$this->split = $dropdown['split'] ?? $this->split;
+		$this->items = $dropdown['items'] ?? $this->items;
 	}
 	
 	protected function render()

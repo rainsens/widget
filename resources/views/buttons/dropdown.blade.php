@@ -4,8 +4,7 @@
             type="button"
             class="btn {{ $color }} {{ $size }} dropdown-toggle"
             data-toggle="dropdown">
-            <i class="fa {{ $icon }}"></i>
-            {{ $text }}
+            @if($icon)<i class="fa {{ $icon }}"></i> @endif{{ $text }}
         </button>
         <button type="button" class="btn {{ $color }} {{ $size }} dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
             <span class="caret"></span>
@@ -16,8 +15,7 @@
             type="button"
             class="btn {{ $color }} {{ $size }} dropdown-toggle"
             data-toggle="dropdown">
-            <i class="fa {{ $icon }}"></i>
-            {{ $text }}
+            @if($icon)<i class="fa {{ $icon }}"></i> @endif{{ $text }}
             <span class="caret ml5"></span>
         </button>
     @endif

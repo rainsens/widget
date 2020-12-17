@@ -1,3 +1,3 @@
 <{{ $tag }} {{ $href }} type="button" class="btn {{ $color }} {{ $size }} {{ $state }} {{ $disable }} {{ $round }} {{ $gradient }} {{ $block }}">
-    <span class="fa {{ $icon }}"></span> {{ $text }}
+    @if($icon)<span class="fa {{ $icon }}"></span> @endif{{ $text }}
 </{{ $tag }}>
