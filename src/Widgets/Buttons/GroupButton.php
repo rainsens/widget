@@ -5,7 +5,7 @@ class GroupButton extends BaseButton
 {
 	protected $buttons = [];
 	
-	public function push(array $buttons)
+	public function push(array $buttons = [])
 	{
 		$this->buttons = $buttons;
 		return $this;

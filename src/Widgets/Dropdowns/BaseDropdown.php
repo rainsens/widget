@@ -5,6 +5,8 @@ use Illuminate\Support\Arr;
 
 abstract class BaseDropdown
 {
+	protected $id;
+	
 	const DROPDOWN_SELECT2 = 'select2';
 	const DROPDOWN_BOOTSTRAP = 'bootstrap';
 	
@@ -27,12 +29,19 @@ abstract class BaseDropdown
 	
 	public function __construct(array $dropdown = [])
 	{
+		$this->setId();
+		
 		$this->color = $dropdown['color'] ?? $this->color;
 		$this->placeholder = $dropdown['placeholder'] ?? $this->placeholder;
 		$this->isMultiple = $dropdown['isMultiple'] ?? $this->isMultiple;
 		$this->items = $dropdown['items'] ?? $this->items;
 		
 		$this->addPlaceholderForSingleSelect();
+	}
+	
+	protected function setId()
+	{
+		$this->id = uniqid('widget-form-dropdown-id-');
 	}
 	
 	protected function addPlaceholderForSingleSelect()
@@ -49,6 +58,7 @@ abstract class BaseDropdown
 	
 	public function getAttributes()
 	{
+		$attributes['id'] = $this->id;
 		$attributes['color'] = $this->color;
 		$attributes['placeholder'] = $this->placeholder;
 		$attributes['isMultiple'] = $this->isMultiple;

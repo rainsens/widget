@@ -1,21 +1,12 @@
 <?php
-use Rainsens\Widget\Widgets\Forms\Dropdown\BaseDropdown;
-use Rainsens\Widget\Widgets\Forms\Dropdown\Select2Dropdown;
+use Rainsens\Widget\Widgets\Forms\Form\Form;
 
 if (! function_exists('_widget_form')) {
-	function _widget_form() {
-	
-	}
-}
-
-if (! function_exists('_widget_form_dropdown')) {
 	/**
-	 * @param string $type
-	 * @return Select2Dropdown
+	 * @param array $form
+	 * @return Form
 	 */
-	function _widget_form_dropdown(string $type = 'select2') {
-		if ($type === BaseDropdown::DROPDOWN_SELECT2) {
-			return app(Select2Dropdown::class);
-		}
+	function _widget_form(array $form = []) {
+		return app(Form::class, ['form' => $form]);
 	}
 }

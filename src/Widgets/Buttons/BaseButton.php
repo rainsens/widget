@@ -3,31 +3,31 @@ namespace Rainsens\Widget\Widgets\Buttons;
 
 abstract class BaseButton
 {
-	protected $href;
-	protected $target;
-	protected $icon;
-	protected $text;
-	protected $color;
-	protected $size;
-	protected $state;
-	protected $disable;
-	protected $round;
-	protected $gradient;
-	protected $block;
+	protected $href = '';
+	protected $target = '';
+	protected $icon = '';
+	protected $text = 'Default';
+	protected $color = 'btn-default';
+	protected $size = 'btn-sm';
+	protected $state = '';
+	protected $disable = false;
+	protected $round = false;
+	protected $gradient = false;
+	protected $block = false;
 	
 	public function __construct(array $button = [])
 	{
-		$this->href     = $button['href'] ?? '';
-		$this->target   = $button['target'] ?? '';
-		$this->icon     = $button['icon'] ?? '';
-		$this->text     = $button['text'] ?? 'Default';
-		$this->color    = $button['color'] ?? 'btn-default';
-		$this->size     = $button['size'] ?? 'btn-sm';
-		$this->state    = $button['state'] ?? '';
-		$this->disable  = $button['disable'] ?? false;
-		$this->round    = $button['round'] ?? false;
-		$this->gradient = $button['gradient'] ?? false;
-		$this->block    = $button['block'] ?? false;
+		$this->href     = $button['href'] ?? $this->href;
+		$this->target   = $button['target'] ?? $this->target;
+		$this->icon     = $button['icon'] ?? $this->icon;
+		$this->text     = $button['text'] ?? $this->text;
+		$this->color    = $button['color'] ?? $this->color;
+		$this->size     = $button['size'] ?? $this->size;
+		$this->state    = $button['state'] ?? $this->state;
+		$this->disable  = $button['disable'] ?? $this->disable;
+		$this->round    = $button['round'] ?? $this->round;
+		$this->gradient = $button['gradient'] ?? $this->gradient;
+		$this->block    = $button['block'] ?? $this->block;
 	}
 	
 	protected function getAttributes()
