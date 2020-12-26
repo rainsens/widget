@@ -1,5 +1,3 @@
-@inject('Nestable', 'Rainsens\Widget\Widgets\Nestables\Nestable')
-
 <menu id="nestable-menu" class="text-right mb10">
     <div class="btn-group" data-toggle="buttons">
         <label class="btn btn-primary btn-sm">
@@ -25,8 +23,8 @@
 {{--<textarea id="nestable-output" class="form-control"></textarea>--}}
 
 <!-- List 1 -->
-<div class="dd mb35" id="nestable">
-    {!! $items !!}
+<div class="dd mb35" id="nestable" style="max-width: 100%">
+	{!! $items !!}
 </div>
 
 @push('scripts')
@@ -70,8 +68,8 @@
 				if (!items.length) {
 					return  false;
 				}
-				axios.post('{{ $orderUrl }}', {data: items})
-				.then(function (res) {
+				axios.post('{{ $urls['order'] }}', {data: items})
+				.then(function (response) {
 					
 					admNotify('system', 'Saved Successfully')
 					
@@ -82,12 +80,12 @@
 			
 			// Create
 			$('.data-create').click(function () {
-				location.href = '{{ $urls[Nestable::CREATE_URL] }}';
+				location.href = '{{ $urls['create'] }}';
 			});
 			
 			// Refresh
 			$('.data-refresh').click(function () {
-				location.href = '{{ $urls[Nestable::REFRESH_URL] }}';
+				location.href = '{{ $urls['refresh'] }}';
 			});
 		});
     </script>

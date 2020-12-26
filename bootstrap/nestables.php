@@ -2,7 +2,7 @@
 use Rainsens\Widget\Widgets\Nestables\Nestable;
 
 if (! function_exists('_widget_nestable')) {
-	function _widget_nestable(array $data, string $textField, string $parentField, array $urls) {
-		return app(Nestable::class, [$data, $textField, $parentField, $urls]);
+	function _widget_nestable(array $data = [], string $textField = 'name', string $parentField = 'parent_id', array $urls = []) {
+		return app(Nestable::class, ['data' => $data, 'textField' => $textField, 'parentField' => $parentField, 'urls' => $urls]);
 	}
 }

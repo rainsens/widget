@@ -1185,12 +1185,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rainsens/asset.git",
-                "reference": "065f85d35e00b03ba64d834140ee72b2a16b3a2f"
+                "reference": "b784e94d765e4129569cd30719bc0be13f6bb394"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rainsens/asset/zipball/065f85d35e00b03ba64d834140ee72b2a16b3a2f",
-                "reference": "065f85d35e00b03ba64d834140ee72b2a16b3a2f",
+                "url": "https://api.github.com/repos/rainsens/asset/zipball/b784e94d765e4129569cd30719bc0be13f6bb394",
+                "reference": "b784e94d765e4129569cd30719bc0be13f6bb394",
                 "shasum": ""
             },
             "require": {
@@ -1225,7 +1225,7 @@
                 }
             ],
             "description": "A php website asset package based upon Laravel",
-            "time": "2020-12-17T08:05:13+00:00"
+            "time": "2020-12-25T07:03:28+00:00"
         },
         {
             "name": "ramsey/uuid",

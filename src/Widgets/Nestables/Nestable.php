@@ -1,6 +1,8 @@
 <?php
 namespace Rainsens\Widget\Widgets\Nestables;
 
+use Illuminate\Support\Arr;
+
 class Nestable
 {
 	const ORDER_URL     = 'order';
@@ -17,42 +19,97 @@ class Nestable
 		self::REFRESH_URL,
 	];
 	
-	protected $urls = [];
+	protected $urls = [
+		self::ORDER_URL => '#',
+		self::CREATE_URL => '#',
+		self::EDIT_URL => '#',
+		self::DELETE_URL => '#',
+		self::REFRESH_URL => '#',
+	];
 	
-	protected $settled;
+	protected $data = [
+		['id' => 1, 'parent_id' => 0, 'name' => 'Example name 1'],
+		['id' => 2, 'parent_id' => 1, 'name' => 'Example name 2'],
+		['id' => 3, 'parent_id' => 1, 'name' => 'Example name 3'],
+		['id' => 4, 'parent_id' => 1, 'name' => 'Example name 4'],
+		['id' => 5, 'parent_id' => 1, 'name' => 'Example name 5'],
+		['id' => 6, 'parent_id' => 0, 'name' => 'Example name 6'],
+		['id' => 7, 'parent_id' => 6, 'name' => 'Example name 7'],
+		['id' => 8, 'parent_id' => 6, 'name' => 'Example name 8'],
+		['id' => 9, 'parent_id' => 6, 'name' => 'Example name 9'],
+	];
+	
+	protected $textField = 'name';
+	protected $parentField = 'parent_id';
 	
 	protected $items = '';
 	
-	public function __construct(array $data, string $textField, string $parentField, array $urls = [])
+	public function __construct(
+		array $data = [],
+		string $textField = '',
+		string $parentField = '',
+		array $urls = []
+	)
 	{
-		$this->settled = collect();
+		$this->textField = $textField ?? $this->textField;
+		$this->parentField = $parentField ?? $this->parentField;
 		
-		$data = _recursive($data, $parentField);
-		$this->retrieve($data, $textField, $parentField);
+		$this->urls = empty($urls) ? $this->urls : $this->addUrls($urls);
 		
-		$this->addUrls($urls);
+		$this->data = empty($data) ? $this->data : $data;
+		
+		// Order the data provided by end user.
+		$data = _widget_recursive($this->data, $parentField);
+		
+		$this->retrieve($data, $this->textField, $this->parentField);
+		
 	}
 	
 	protected function addUrls(array $urls)
 	{
+		$result = [];
 		foreach ($urls as $key => $url) {
 			if (in_array($key, $this->urlTypes)) {
-				$this->urls[$key] = $url;
+				$result[$key] = $url;
 			}
 		}
+		return $result;
+	}
+	
+	protected function getSiblings(int $parentId = 0)
+	{
+		$parentField = $this->parentField;
+		return Arr::where($this->data, function ($value) use ($parentField, $parentId) {
+			return $value[$parentField] === $parentId;
+		});
+	}
+	
+	protected function isFirstChild(array $currentItem, int $parentId = 0)
+	{
+		$sibings = $this->getSiblings($parentId);
+		$firstItem = Arr::first($sibings);
+		return $firstItem['id'] === $currentItem['id'];
+	}
+	
+	protected function isLastChild(array $currentItem, int $parentId)
+	{
+		$sibings = $this->getSiblings($parentId);
+		$lastItem = Arr::last($sibings);
+		return $lastItem['id'] === $currentItem['id'];
+	}
+	
+	protected function hasChildren(array $currentItem)
+	{
+		return collect($this->data)->where($this->parentField, $currentItem['id'])->isNotEmpty();
 	}
 	
 	protected function retrieve(array $data, $textField, $parentField, $parentId = 0)
 	{
 		foreach ($data as $key => $value) {
 			if ($value[$parentField] === $parentId) {
-				
-				// Check if already settled.
-				if (! $this->settled->contains($parentField, $value[$parentField])) {
-					$this->items .= "<ol class='dd-list'>";
+				if ($this->isFirstChild($value, $parentId)) {
+					$this->items .= "<ol class='dd-list'>\n";
 				}
-				$this->settled->push($value);
-				
 				// Append new item.
 				$this->items .= "
 					<li class='dd-item' data-id='{$value['id']}'>
@@ -70,15 +127,16 @@ class Nestable
 				// Remove settled item.
 				unset($data[$key]);
 				
-				// Check if still had childen, if not, close the tag.
-				if (! collect($data)->contains($parentField, $value[$parentField])) {
-					$this->items .= "</ol>\n";
+				if ($this->hasChildren($value)) {
+					$this->retrieve($data, $textField, $parentField, $value['id']);
+				} else {
+					if ($this->isLastChild($value, $parentId)) {
+						$this->items .= "</li>\n";
+						$this->items .= "</ol>\n";
+					} else {
+						$this->items .= "</li>\n";
+					}
 				}
-				
-				$this->retrieve($data, $textField, $parentField, $value['id']);
-				
-				// Close the sub tag.
-				$this->items .= "</li>";
 			}
 		}
 	}
