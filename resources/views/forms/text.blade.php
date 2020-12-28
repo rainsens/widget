@@ -6,17 +6,7 @@
         
         {!! $addon->left() !!}
             
-            <input
-                type="text"
-                id="{{ $element->id() }}"
-                name="{{ $element->name() }}"
-                class="form-control {{ $element->size() }} {{ $element->class() }}"
-                placeholder="{{ $element->placeholder() }}"
-                {{ $element->autofocus() ? 'autofocus' : '' }}
-                {{ $element->disabled() ? 'disabled' : '' }}
-                {{ $element->readonly() ? 'readonly' : '' }}
-                {{ $element->required()['require'] ? 'required' : '' }}
-                {{ implode(' ', $element->attributes()) }}>
+            <input {!! $element->attr() !!}>
             
         {!! $addon->right() !!}
         

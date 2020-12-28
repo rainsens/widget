@@ -18,6 +18,8 @@ trait ElementInput
 	 */
 	protected $width;
 	
+	protected $type = 'text';
+	
 	protected $id;
 	
 	/**
@@ -25,19 +27,19 @@ trait ElementInput
 	 *
 	 * @var string
 	 */
-	protected $class = '';
+	protected $class = 'form-control';
+	
+	protected $placeholder = 'Please enter';
 	
 	protected $disabled = false;
 	
 	protected $autofocus = false;
 	
-	protected $placeholder = 'Please enter';
+	protected $readonly = false;
 	
 	protected $required = ['require' => false, 'asterisk' => false];
 	
-	protected $readonly = false;
-	
-	protected $value;
+	protected $value = '';
 	
 	/**
 	 * Custom attributes of input.
@@ -46,9 +48,25 @@ trait ElementInput
 	 */
 	protected $attributes = [];
 	
+	/**
+	 * Render attributes for input.
+	 *
+	 * @var array
+	 */
+	protected $variables = [];
+	
 	protected function formatInputId(string $fieldName)
 	{
 		$this->id = str_replace('.', '_', $fieldName);
+	}
+	
+	public function type(string $type = null)
+	{
+		if (is_null($type)) {
+			return $this->type;
+		}
+		$this->type = $type;
+		return $this;
 	}
 	
 	public function id()
@@ -87,9 +105,9 @@ trait ElementInput
 	public function class(string $cssClass = null)
 	{
 		if (is_null($cssClass)) {
-			return $this->class;
+			return "{$this->class} {$this->size()}";
 		}
-		$this->class = $cssClass;
+		$this->class .= " $cssClass";
 		return $this;
 	}
 	
@@ -173,5 +191,50 @@ trait ElementInput
 			$this->attributes[$attribute] = $value;
 		}
 		return $this;
+	}
+	
+	public function variables($name = null, $value = null)
+	{
+		if (is_null($value)) {
+			$variables = array_merge($this->variables, $this->attributes);
+			if (is_null($name)) {
+				return $variables;
+			}
+			return $variables[$name];
+		}
+		$this->variables[$name] = $value;
+		return $this;
+	}
+	
+	public function attr()
+	{
+		$this->variables('type', $this->type())
+			->variables('id', $this->id())
+			->variables('name', $this->name())
+			->variables('value', $this->value())
+			->variables('class', $this->class())
+			->variables('placeholder', $this->placeholder());
+		
+		if ($this->autofocus()) {
+			$this->variables('autofocus', $this->autofocus());
+		}
+		if ($this->disabled()) {
+			$this->variables('disabled', $this->disabled());
+		}
+		if ($this->readonly()) {
+			$this->variables('readonly', $this->readonly());
+		}
+		if ($this->required['require']) {
+			$this->variables('required', $this->required()['required']);
+		}
+		$attr = '';
+		foreach ($this->variables() as $k => $v) {
+			if ($v) {
+				$attr .= " {$k}='{$v}'";
+			} else {
+				$attr .= " {$k}";
+			}
+		}
+		return $attr;
 	}
 }

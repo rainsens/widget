@@ -17,7 +17,7 @@ class ElementLabel
 	 *
 	 * @var string
 	 */
-	protected $class = '';
+	protected $class = 'control-label';
 	
 	/**
 	 * Customized attributes.
@@ -79,7 +79,7 @@ class ElementLabel
 		if (is_null($class)) {
 			return $this->class;
 		}
-		$this->class = $class;
+		$this->class .= " {$class}";
 		return $this->element;
 	}
 	
@@ -97,7 +97,7 @@ class ElementLabel
 	
 	protected function getClass()
 	{
-		$class = 'control-label';
+		$class = $this->class;
 		
 		// Only horizontal layout has col class.
 		if ($this->element->layout()->horizon()) {
@@ -108,6 +108,16 @@ class ElementLabel
 		return $class;
 	}
 	
+	protected function asterisk()
+	{
+		$required = $this->element->required();
+		if ($required['require'] and $required['asterisk']) {
+			$html = "<span class='text-danger'>*</span>";
+			return $html;
+		}
+		return null;
+	}
+	
 	/**
 	 * Assemble label attributes as html string.
 	 *
@@ -116,21 +126,21 @@ class ElementLabel
 	 */
 	protected function assemble(array $attributes)
 	{
+		$attributes = array_merge($attributes, $this->attributes);
+		
 		$attr = "";
 		foreach ($attributes as $k => $v) {
 			$attr .= " {$k}='{$v}'";
 		}
-		$customAttr = implode(' ', $this->attributes);
-		$html = "<label{$attr}{$customAttr}>{$this->name}</label>";
+		$html  = "<label{$attr}>{$this->asterisk()} {$this->name}</label>";
 		return $html;
 	}
 	
 	public function render(): string
 	{
-		$html = $this->assemble([
+		return $this->assemble([
 			"for"   => $this->for(),
 			"class" => $this->getClass(),
 		]);
-		return $html;
 	}
 }

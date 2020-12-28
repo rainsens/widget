@@ -1,14 +1,9 @@
-{!! $container->start(true) !!}
+{!! $container->start(false) !!}
 
     {!! $label->render() !!}
     {!! $layout->start() !!}
 
-        <textarea
-            id="{{ $element->id() }}"
-            name="{{ $element->name() }}"
-            class="form-control {{ $element->size() }} {{ $element->class() }}"
-            rows="{{ $element->rows() }}">
-        </textarea>
+        <textarea {!! $element->attr() !!}></textarea>
 
         {!! $help->render() !!}
         {!! $error->render() !!}

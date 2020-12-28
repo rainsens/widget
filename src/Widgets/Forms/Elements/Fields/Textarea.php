@@ -15,4 +15,10 @@ class Textarea extends Element
 		$this->rows = $rows;
 		return $this;
 	}
+	
+	public function attr()
+	{
+		$this->variables('rows', $this->rows());
+		return parent::attr();
+	}
 }
