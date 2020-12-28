@@ -17,6 +17,27 @@ trait ElementShortcut
 {
 	/*
 	|--------------------------------------------------------------------------
+	| Shortcuts of Element
+	|--------------------------------------------------------------------------
+	|
+	| public function width(int $width = null)
+	| public function size(string $size = null)
+	| public function class(string $inputClass = null)
+	| public function disabled(bool $disabled = null)
+	| public function autofocus(bool $autofocus = null)
+	| public function placeholder($text = null)
+	| public function required(...$required)
+	| public function readonly($readonly = null)
+	| public function value($value = null)
+	|
+	|
+	|
+	*/
+	
+	
+	
+	/*
+	|--------------------------------------------------------------------------
 	| Shortcuts of ElementLabel
 	|--------------------------------------------------------------------------
 	|
@@ -29,58 +50,6 @@ trait ElementShortcut
 	public function labelClass(string $class = null)
 	{
 		return $this->label->class($class);
-	}
-	
-	
-	/*
-	|--------------------------------------------------------------------------
-	| Shortcuts of ElementInput
-	|--------------------------------------------------------------------------
-	|
-	*/
-	public function inputWidth(int $width = null)
-	{
-		return $this->input->width($width);
-	}
-	
-	public function inputSize(string $size = null)
-	{
-		return $this->input->size($size);
-	}
-	
-	public function inputClass(string $inputClass = null)
-	{
-		return $this->input->class($inputClass);
-	}
-	
-	public function inputDisabled(bool $disabled = null)
-	{
-		return $this->input->disabled($disabled);
-	}
-	
-	public function inputAutofocus(bool $autofocus = null)
-	{
-		return $this->input->autofocus($autofocus);
-	}
-	
-	public function inputPlaceholder($text = null)
-	{
-		return $this->input->placeholder($text);
-	}
-	
-	public function inputRequired(...$required)
-	{
-		return $this->input->required($required);
-	}
-	
-	public function inputReadonly($readonly = null)
-	{
-		return $this->input->readonly($readonly);
-	}
-	
-	public function inputValue($value = null)
-	{
-		return $this->input->value($value);
 	}
 	
 	

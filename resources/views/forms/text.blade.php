@@ -8,15 +8,15 @@
             
             <input
                 type="text"
-                id="{{ $input->id() }}"
-                name="{{ $field->name() }}"
-                class="form-control {{ $input->size() }} {{ $input->class() }}"
-                placeholder="{{ $input->placeholder() }}"
-                {{ $input->autofocus() ? 'autofocus' : '' }}
-                {{ $input->disabled() ? 'disabled' : '' }}
-                {{ $input->readonly() ? 'readonly' : '' }}
-                {{ $input->required()['require'] ? 'required' : '' }}
-                {{ implode(' ', $input->attributes()) }}>
+                id="{{ $element->id() }}"
+                name="{{ $element->name() }}"
+                class="form-control {{ $element->size() }} {{ $element->class() }}"
+                placeholder="{{ $element->placeholder() }}"
+                {{ $element->autofocus() ? 'autofocus' : '' }}
+                {{ $element->disabled() ? 'disabled' : '' }}
+                {{ $element->readonly() ? 'readonly' : '' }}
+                {{ $element->required()['require'] ? 'required' : '' }}
+                {{ implode(' ', $element->attributes()) }}>
             
         {!! $addon->right() !!}
         
@@ -46,7 +46,7 @@
                     $(".eyescript").mask("~9.99 ~9.99 999");
                     $(".custom").mask("9.99.999.9999");
             	*/
-                $('#'+'{{ $input->id() }}').mask('{{ $element->inputmask() }}')
+                $('#'+'{{ $element->id() }}').mask('{{ $element->inputmask() }}')
             });
         </script>
     @endif

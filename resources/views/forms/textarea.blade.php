@@ -1,13 +1,13 @@
-{!! $container->start() !!}
+{!! $container->start(true) !!}
 
     {!! $label->render() !!}
     {!! $layout->start() !!}
 
         <textarea
-            id="{{ $input->id() }}"
-            name="{{ $input->name() }}"
-            class="form-control {{ $input->size() }} {{ $input->class() }}"
-            rows={{ $element->rows() }}>
+            id="{{ $element->id() }}"
+            name="{{ $element->name() }}"
+            class="form-control {{ $element->size() }} {{ $element->class() }}"
+            rows="{{ $element->rows() }}">
         </textarea>
 
         {!! $help->render() !!}

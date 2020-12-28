@@ -1,9 +1,16 @@
 <?php
 namespace Rainsens\Widget\Widgets\Forms\Elements;
 
+/**
+ * Element & ElementInput
+ *
+ * Class Element
+ * @package Rainsens\Widget\Widgets\Forms\Elements
+ */
 class Element
 {
 	use ElementInitializer;
+	use ElementInput;
 	use ElementShortcut;
 	
 	/**
@@ -15,11 +22,6 @@ class Element
 	 * @var ElementLabel
 	 */
 	protected $label;
-	
-	/**
-	 * @var ElementInput
-	 */
-	protected $input;
 	
 	/**
 	 * @var ElementAddon
@@ -58,9 +60,10 @@ class Element
 	
 	public function boot()
 	{
-		$this->field        = app(ElementField::class,  ['element' => $this, 'field' => $this->fieldName]);
-		$this->label        = app(ElementLabel::class,  ['element' => $this, 'label' => $this->labelName]);
-		$this->input        = app(ElementInput::class,  ['element' => $this, 'field' => $this->fieldName]);
+		$this->formatInputId($this->fieldName());
+		
+		$this->field        = app(ElementField::class,  ['element' => $this, 'field' => $this->fieldName()]);
+		$this->label        = app(ElementLabel::class,  ['element' => $this, 'label' => $this->labelName()]);
 		$this->addon        = app(ElementAddon::class,  ['element' => $this]);
 		$this->help         = app(ElementHelp::class,   ['element' => $this]);
 		$this->error        = app(ElementError::class,  ['element' => $this]);
@@ -79,11 +82,6 @@ class Element
 	public function label()
 	{
 		return $this->label;
-	}
-	
-	public function input()
-	{
-		return $this->input;
 	}
 	
 	public function addon()

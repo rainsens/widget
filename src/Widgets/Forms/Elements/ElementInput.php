@@ -2,16 +2,20 @@
 namespace Rainsens\Widget\Widgets\Forms\Elements;
 
 /**
- * Class for common part of input elements,
+ * Trait ElementInput for main class Element
+ *
+ * Trait for common part of input elements,
  * such as: input, select, checkbox, radiobox, fileupload etc.
  *
- * Class ElementInput
  * @package Rainsens\Widget\Widgets\Forms\Elements
  */
-class ElementInput
+trait ElementInput
 {
-	protected $element;
-	
+	/**
+	 * col-md-8
+	 *
+	 * @var
+	 */
 	protected $width;
 	
 	protected $id;
@@ -42,15 +46,9 @@ class ElementInput
 	 */
 	protected $attributes = [];
 	
-	public function __construct(Element $element, $field = '')
-	{
-		$this->element = $element;
-		$this->id = $this->formatInputId($field);
-	}
-	
 	protected function formatInputId(string $fieldName)
 	{
-		return str_replace('.', '_', $fieldName);
+		$this->id = str_replace('.', '_', $fieldName);
 	}
 	
 	public function id()
@@ -60,39 +58,39 @@ class ElementInput
 	
 	public function name()
 	{
-		return $this->element->field()->name();
+		return $this->field()->name();
 	}
 	
 	public function size()
 	{
-		return $this->element->sizing()->size()['input'];
+		return $this->sizing()->size()['input'];
 	}
 	
 	/**
 	 * Set or get label width.
 	 *
 	 * @param int|null $width
-	 * @return int|Element
+	 * @return int|$this
 	 */
 	public function width(int $width = null)
 	{
 		if (is_null($width)) {
 			if (is_null($this->width)) {
-				return $this->element->form()->layout()->width()['input'];
+				return $this->form()->layout()->width()['input'];
 			}
 			return $this->width;
 		}
 		$this->width = $width;
-		return $this->element;
+		return $this;
 	}
 	
-	public function class(string $inputClass = null)
+	public function class(string $cssClass = null)
 	{
-		if (is_null($inputClass)) {
+		if (is_null($cssClass)) {
 			return $this->class;
 		}
-		$this->class = $inputClass;
-		return $this->element;
+		$this->class = $cssClass;
+		return $this;
 	}
 	
 	public function disabled(bool $disabled = null)
@@ -101,7 +99,7 @@ class ElementInput
 			return $this->disabled;
 		}
 		$this->disabled = $disabled;
-		return $this->element;
+		return $this;
 	}
 	
 	public function autofocus(bool $autofocus = null)
@@ -110,7 +108,7 @@ class ElementInput
 			return $this->autofocus;
 		}
 		$this->autofocus = $autofocus;
-		return $this->element;
+		return $this;
 	}
 	
 	public function placeholder(string $text = null)
@@ -119,7 +117,7 @@ class ElementInput
 			return $this->placeholder;
 		}
 		$this->placeholder = $text;
-		return $this->element;
+		return $this;
 	}
 	
 	public function required(...$required)
@@ -130,7 +128,7 @@ class ElementInput
 		}
 		$this->required['require'] = $required->first();
 		$this->required['asterisk'] = $required->last();
-		return $this->element;
+		return $this;
 	}
 	
 	public function readonly(bool $readonly = null)
@@ -139,7 +137,7 @@ class ElementInput
 			return $this->readonly;
 		}
 		$this->readonly = $readonly;
-		return $this->element;
+		return $this;
 	}
 	
 	public function value($value = null)
@@ -148,7 +146,7 @@ class ElementInput
 			return $this->value;
 		}
 		$this->value = $value;
-		return $this->element;
+		return $this;
 	}
 	
 	/**

@@ -5,7 +5,7 @@ use Rainsens\Widget\Widgets\Forms\Elements\Element;
 
 class Textarea extends Element
 {
-	protected $rows = 5;
+	protected $rows = 3;
 	
 	public function rows(int $rows = null)
 	{

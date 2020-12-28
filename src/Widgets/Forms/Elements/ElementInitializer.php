@@ -18,28 +18,11 @@ trait ElementInitializer
 	 * Class name of element field class.
 	 *
 	 * example: \Forms\Elements\Fields\Text
+	 * will be used for ElementView getting view file.
 	 *
 	 * @var
 	 */
-	protected $class;
-	
-	/**
-	 * Initialize class name.
-	 *
-	 * The class name of current field class.
-	 * example: \Forms\Elements\Fields\Text
-	 *
-	 * @param null $name
-	 * @return string
-	 */
-	public function class($name = null)
-	{
-		if (is_null($name)) {
-			return $this->class ?? get_class($this);
-		}
-		$this->class = $name;
-		return $this;
-	}
+	protected $className;
 	
 	/**
 	 * Initialize form instance.
@@ -83,6 +66,26 @@ trait ElementInitializer
 			return $this->labelName;
 		}
 		$this->labelName = $name;
+		return $this;
+	}
+	
+	/**
+	 * Initialize class name.
+	 *
+	 * The class name of current field class.
+	 * example: \Forms\Elements\Fields\Text
+	 *
+	 * will be used for ElementView getting view file.
+	 *
+	 * @param null $name
+	 * @return string
+	 */
+	public function className($name = null)
+	{
+		if (is_null($name)) {
+			return $this->className ?? get_class($this);
+		}
+		$this->className = $name;
 		return $this;
 	}
 }

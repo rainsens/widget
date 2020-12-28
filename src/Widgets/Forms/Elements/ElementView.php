@@ -36,8 +36,8 @@ class ElementView
 			if (! empty($this->name)) {
 				return $this->name;
 			}
-			$classParts = explode('\\', $this->element->class());
-			return $this->namePrefix . strtolower(end($classParts));
+			$className = explode('\\', $this->element->className());
+			return $this->namePrefix . strtolower(end($className));
 		}
 		$this->name = $viewName;
 		return $this->element;
@@ -49,7 +49,6 @@ class ElementView
 			'element'   => $this->element,
 			'field'     => $this->element->field(),
 			'label'     => $this->element->label(),
-			'input'     => $this->element->input(),
 			'addon'     => $this->element->addon(),
 			'help'      => $this->element->help(),
 			'error'     => $this->element->error(),

@@ -14,13 +14,13 @@ class ElementLayout
 	 *
 	 * @var int|Element
 	 */
-	protected $inputWidth;
+	protected $elementWidth;
 	
 	public function __construct(Element $element)
 	{
 		$this->element = $element;
 		$this->form = $element->form();
-		$this->inputWidth = $element->input()->width();
+		$this->elementWidth = $element->width();
 	}
 	
 	public function horizon(bool $isHorizontal = null)
@@ -38,7 +38,7 @@ class ElementLayout
 	public function start()
 	{
 		if ($this->horizon()) {
-			$html = "<div class='col-md-{$this->inputWidth}'>";
+			$html = "<div class='col-md-{$this->elementWidth}'>";
 			return $html;
 		}
 		return null;

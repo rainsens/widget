@@ -5,16 +5,27 @@ class ElementContainer
 {
 	protected $element;
 	
+	protected $sizeClass;
+	
+	protected $errorClass;
+	
 	protected $class = 'form-group';
 	
 	public function __construct(Element $element)
 	{
 		$this->element = $element;
+		$this->sizeClass = $element->sizing()->size()['form.group'];
+		$this->errorClass = $element->error()->class();
+	}
+	
+	public function disableSizeClass()
+	{
+		$this->sizeClass = null;
 	}
 	
 	public function sizeClass()
 	{
-		return $this->element->sizing()->size()['form.group'];
+		return $this->sizeClass;
 	}
 	
 	public function errorClass()
@@ -31,8 +42,9 @@ class ElementContainer
 		return $this->element;
 	}
 	
-	public function start()
+	public function start($disableSizeClass = true)
 	{
+		if ($disableSizeClass) $this->disableSizeClass();
 		$html = "<div class='{$this->class()}'>";
 		return $html;
 	}
