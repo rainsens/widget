@@ -33,7 +33,7 @@ class ElementError
 	public function class(string $class = null)
 	{
 		if (is_null($class)) {
-			return $this->has() ? 'has-error' : '';
+			return $this->has() ? 'has-error' : null;
 		}
 		$this->class = $class;
 		return $this;
@@ -42,7 +42,7 @@ class ElementError
 	public function icon(string $icon = null)
 	{
 		if (is_null($icon)) {
-			return $this->icon;
+			return $this->has() ? $this->icon : null;
 		}
 		$this->icon = $icon;
 		return $this;
@@ -51,7 +51,7 @@ class ElementError
 	public function desc(string $text = null)
 	{
 		if (is_null($text)) {
-			return $this->has() ? $this->desc : '';
+			return $this->has() ? $this->desc : null;
 		}
 		$this->desc = $text;
 		return $this;

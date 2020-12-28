@@ -23,11 +23,6 @@ class ElementLayout
 		$this->inputWidth = $element->input()->width();
 	}
 	
-	public function size()
-	{
-		return $this->element->sizing()->size()['form.group'];
-	}
-	
 	public function horizon(bool $isHorizontal = null)
 	{
 		if (is_null($isHorizontal)) {

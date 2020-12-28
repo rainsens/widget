@@ -58,7 +58,10 @@ class ElementAddon
 	
 	public function has()
 	{
-		return $this->hasIcon() or $this->hasText();
+		return $this->hasIcon(self::PLACE_L) or
+			$this->hasIcon(self::PLACE_R) or
+			$this->hasText(self::PLACE_L) or
+			$this->hasText(self::PLACE_R);
 	}
 	
 	/**

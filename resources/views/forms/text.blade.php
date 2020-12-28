@@ -1,4 +1,4 @@
-<div class="form-group {{ $layout->size() }} {{ $error->class() }}">
+{!! $container->start() !!}
     
     {!! $label->render() !!}
     
@@ -25,7 +25,7 @@
         
     {!! $layout->end() !!}
     
-</div>
+{!! $container->end() !!}
 
 @push('scripts')
     @if($element->inputmask())

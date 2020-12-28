@@ -55,6 +55,7 @@ class ElementView
 			'error'     => $this->element->error(),
 			'layout'    => $this->element->layout(),
 			'sizing'    => $this->element->sizing(),
+			'container' => $this->element->container(),
 			'view'      => $this,
 		])->render();
 	}
