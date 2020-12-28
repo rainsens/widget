@@ -2,8 +2,11 @@
 namespace Rainsens\Widget\Widgets\Forms;
 
 use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Model;
 use Rainsens\Widget\Widgets\Forms\Elements\Element;
+use Rainsens\Widget\Widgets\Forms\Elements\Fields\Display;
 use Rainsens\Widget\Widgets\Forms\Elements\Fields\Divider;
+use Rainsens\Widget\Widgets\Forms\Elements\Fields\Hidden;
 use Rainsens\Widget\Widgets\Forms\Elements\Fields\Text;
 use Rainsens\Widget\Widgets\Forms\Elements\Fields\Textarea;
 
@@ -25,6 +28,8 @@ class FormElement
 		'divider'           => Divider::class,
 		'text'              => Text::class,
 		'textarea'          => Textarea::class,
+		'display'           => Display::class,
+		'hidden'            => Hidden::class,
 	];
 	
 	public static $fieldAlias = [];
@@ -65,5 +70,11 @@ class FormElement
 		}
 		
 		return null;
+	}
+	
+	public function setElementFieldValue(Model $model)
+	{
+		$values = $model->toArray();
+		// todo: set field value while editing.
 	}
 }

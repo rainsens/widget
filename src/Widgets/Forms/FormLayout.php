@@ -87,8 +87,8 @@ class FormLayout
 		if ($width->isEmpty()) {
 			return $this->width;
 		}
-		$this->width['label'] = $width->first();
-		$this->width['input'] = $width->last();
+		$this->width['label'] = $width->shift();
+		$this->width['input'] = $width->pop();
 		return $this->form;
 	}
 	

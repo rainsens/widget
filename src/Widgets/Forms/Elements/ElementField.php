@@ -2,14 +2,9 @@
 namespace Rainsens\Widget\Widgets\Forms\Elements;
 
 use Illuminate\Support\Str;
-use Rainsens\Widget\Widgets\Forms\FormEmbedded;
-use Rainsens\Widget\Widgets\Forms\Form;
-use Rainsens\Widget\Widgets\Forms\FormNested;
 
 class ElementField
 {
-	use ElementShortcut;
-	
 	/**
 	 * @var Element
 	 */
@@ -21,6 +16,27 @@ class ElementField
 	 * @var string
 	 */
 	protected $name;
+	
+	/**
+	 * The default value.
+	 *
+	 * @var
+	 */
+	protected $default = '';
+	
+	/**
+	 * The original value.
+	 *
+	 * @var
+	 */
+	protected $original = '';
+	
+	/**
+	 * The new value.
+	 *
+	 * @var
+	 */
+	protected $value = '';
 	
 	protected $isJsonField = false;
 	
@@ -49,6 +65,42 @@ class ElementField
 	public function name()
 	{
 		return $this->name;
+	}
+	
+	public function default($value = null)
+	{
+		if (is_null($value)) {
+			return $this->default;
+		}
+		$this->default = $value;
+		return $this->element;
+	}
+	
+	public function original($value = null)
+	{
+		if (is_null($value)) {
+			return $this->original;
+		}
+		$this->original = $value;
+		return $this->element;
+	}
+	
+	public function value($value = null)
+	{
+		if (is_null($value)) {
+			if ($this->value) {
+				return $this->value;
+			}
+			if ($oldValue = old($this->name())) {
+				return $oldValue;
+			}
+			if ($this->original()) {
+				return $this->original();
+			}
+			return $this->default();
+		}
+		$this->value = $value;
+		return $this->element;
 	}
 	
 }

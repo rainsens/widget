@@ -1,6 +1,8 @@
 <?php
 namespace Rainsens\Widget\Widgets\Forms\Elements;
 
+use Closure;
+
 /**
  * Trait ElementInput for main class Element
  *
@@ -39,8 +41,6 @@ trait ElementInput
 	
 	protected $required = ['require' => false, 'asterisk' => false];
 	
-	protected $value = '';
-	
 	/**
 	 * Custom attributes of input.
 	 *
@@ -54,6 +54,11 @@ trait ElementInput
 	 * @var array
 	 */
 	protected $variables = [];
+	
+	/**
+	 * @var Closure
+	 */
+	protected $closure;
 	
 	protected function formatInputId(string $fieldName)
 	{
@@ -144,8 +149,8 @@ trait ElementInput
 		if ($required->isEmpty()) {
 			return $this->required;
 		}
-		$this->required['require'] = $required->first();
-		$this->required['asterisk'] = $required->last();
+		$this->required['require'] = (bool)$required->shift();
+		$this->required['asterisk'] = (bool)$required->pop();
 		return $this;
 	}
 	
@@ -154,17 +159,13 @@ trait ElementInput
 		if (is_null($readonly)) {
 			return $this->readonly;
 		}
-		$this->readonly = $readonly;
+		$this->readonly = (bool)$readonly;
 		return $this;
 	}
 	
-	public function value($value = null)
+	public function value()
 	{
-		if (is_null($value)) {
-			return $this->value;
-		}
-		$this->value = $value;
-		return $this;
+		return $this->field()->value();
 	}
 	
 	/**
@@ -190,6 +191,12 @@ trait ElementInput
 		if (! array_key_exists($attribute, $this->attributes)) {
 			$this->attributes[$attribute] = $value;
 		}
+		return $this;
+	}
+	
+	public function with(Closure $closure)
+	{
+		$this->closure = $closure;
 		return $this;
 	}
 	
@@ -225,7 +232,7 @@ trait ElementInput
 			$this->variables('readonly', $this->readonly());
 		}
 		if ($this->required['require']) {
-			$this->variables('required', $this->required()['required']);
+			$this->variables('required', $this->required()['require']);
 		}
 		$attr = '';
 		foreach ($this->variables() as $k => $v) {
