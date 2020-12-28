@@ -5,6 +5,7 @@ use Illuminate\Support\Arr;
 use Rainsens\Widget\Widgets\Forms\Elements\Element;
 use Rainsens\Widget\Widgets\Forms\Elements\Fields\Divider;
 use Rainsens\Widget\Widgets\Forms\Elements\Fields\Text;
+use Rainsens\Widget\Widgets\Forms\Elements\Fields\Textarea;
 
 class FormElement
 {
@@ -21,8 +22,9 @@ class FormElement
 	protected $attachedElementFields;
 	
 	public static $availableFields = [
-		'text'              => Text::class,
 		'divider'           => Divider::class,
+		'text'              => Text::class,
+		'textarea'          => Textarea::class,
 	];
 	
 	public static $fieldAlias = [];

@@ -16,8 +16,6 @@ class ElementInput
 	
 	protected $id;
 	
-	protected $name;
-	
 	/**
 	 * Classes customized by end user.
 	 *
@@ -58,6 +56,11 @@ class ElementInput
 	public function id()
 	{
 		return $this->id;
+	}
+	
+	public function name()
+	{
+		return $this->element->field()->name();
 	}
 	
 	public function size()

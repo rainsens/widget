@@ -1,6 +1,17 @@
-<div class="form-group {{ $error->class() }}">
-    <label class="col-lg-3 control-label" for="textArea2">Text Area</label>
-    <div class="col-lg-8">
-        <textarea class="form-control" id="textArea2" rows="3"></textarea>
-    </div>
-</div>
+{!! $container->start() !!}
+
+    {!! $label->render() !!}
+    {!! $layout->start() !!}
+
+        <textarea
+            id="{{ $input->id() }}"
+            name="{{ $input->name() }}"
+            class="form-control {{ $input->size() }} {{ $input->class() }}"
+            rows={{ $element->rows() }}>
+        </textarea>
+
+        {!! $help->render() !!}
+        {!! $error->render() !!}
+
+    {!! $layout->end() !!}
+{!! $container->end() !!}
