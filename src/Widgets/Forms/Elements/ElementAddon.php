@@ -19,6 +19,11 @@ class ElementAddon
 		$this->element = $element;
 	}
 	
+	public function size()
+	{
+		return $this->element->sizing()->size()['input.group'];
+	}
+	
 	public function icons(...$icons)
 	{
 		$icons = collect($icons)->flatten();
@@ -64,7 +69,7 @@ class ElementAddon
 	public function left()
 	{
 		if ($this->has()) {
-			$html = "<div class='input-group '>";
+			$html = "<div class='input-group {$this->size()}'>";
 			
 			if ($this->hasIcon(self::PLACE_L)) {
 				$html .= "<span class='input-group-addon'><i class='fa {$this->icons[self::PLACE_L]}'></i></span>";

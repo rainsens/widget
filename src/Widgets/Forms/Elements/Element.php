@@ -46,16 +46,22 @@ class Element
 	 */
 	protected $layout;
 	
+	/**
+	 * @var ElementSizing;
+	 */
+	protected $sizing;
+	
 	public function boot()
 	{
-		$this->field  = app(ElementField::class,  ['element' => $this, 'field' => $this->fieldName]);
-		$this->label  = app(ElementLabel::class,  ['element' => $this, 'label' => $this->labelName]);
-		$this->input  = app(ElementInput::class,  ['element' => $this, 'field' => $this->fieldName]);
-		$this->addon  = app(ElementAddon::class,  ['element' => $this]);
-		$this->help   = app(ElementHelp::class,   ['element' => $this]);
-		$this->error  = app(ElementError::class,  ['element' => $this]);
-		$this->view   = app(ElementView::class,   ['element' => $this]);
-		$this->layout = app(ElementLayout::class, ['element' => $this]);
+		$this->field    = app(ElementField::class,  ['element' => $this, 'field' => $this->fieldName]);
+		$this->label    = app(ElementLabel::class,  ['element' => $this, 'label' => $this->labelName]);
+		$this->input    = app(ElementInput::class,  ['element' => $this, 'field' => $this->fieldName]);
+		$this->addon    = app(ElementAddon::class,  ['element' => $this]);
+		$this->help     = app(ElementHelp::class,   ['element' => $this]);
+		$this->error    = app(ElementError::class,  ['element' => $this]);
+		$this->view     = app(ElementView::class,   ['element' => $this]);
+		$this->layout   = app(ElementLayout::class, ['element' => $this]);
+		$this->sizing     = app(ElementSizing::class, ['element' => $this]);
 		return $this;
 	}
 	
@@ -97,6 +103,11 @@ class Element
 	public function layout()
 	{
 		return $this->layout;
+	}
+	
+	public function sizing()
+	{
+		return $this->sizing;
 	}
 	
 	public function __toString()

@@ -1,4 +1,4 @@
-<div class="form-group {{ $error->class() }}">
+<div class="form-group {{ $layout->size() }} {{ $error->class() }}">
     
     {!! $label->render() !!}
     
@@ -10,7 +10,7 @@
                 type="text"
                 id="{{ $input->id() }}"
                 name="{{ $field->name() }}"
-                class="form-control {{ $input->class() }}"
+                class="form-control {{ $input->size() }} {{ $input->class() }}"
                 placeholder="{{ $input->placeholder() }}"
                 {{ $input->autofocus() ? 'autofocus' : '' }}
                 {{ $input->disabled() ? 'disabled' : '' }}

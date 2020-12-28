@@ -60,6 +60,11 @@ class ElementInput
 		return $this->id;
 	}
 	
+	public function size()
+	{
+		return $this->element->sizing()->size()['input'];
+	}
+	
 	/**
 	 * Set or get label width.
 	 *
